@@ -1,0 +1,12 @@
+Consideraciones tecnicas sobre el proyecto de automatizcion con Python:
+Se utilizo el decorador Parametrize de pytest para parametrizar los datos de entrada en los test.
+Haciendo que cada test sea reutilizable con distinto set de datos.
+
+Instrucciones para generar y visualizar el reporte en Allure:
+Instalar el modulo Allure
+Ejecutar las pruebas y crear las carpetas donde se guardaran los archivos de datos generados por Allure y los datos
+para el reportecon el comando:
+pytest --alluredir allure-results
+
+Visualizar el reporte ejecutando el siguiente comando:
+allure serve allure-results
