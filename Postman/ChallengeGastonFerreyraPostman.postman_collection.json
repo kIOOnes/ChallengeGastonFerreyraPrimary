@@ -1,0 +1,235 @@
+{
+	"info": {
+		"_postman_id": "7f79b744-8eb5-4a35-981c-209924bab808",
+		"name": "ChallengeGastonFerreyraPostman",
+		"description": "Las pruebas que incluyen la coleccion. Prueban el metodo de la API para dar de alta pedidos tanto para compra como para venta. Verifican que la API responda correctamente en casos de exito y en casos de error, devuelva el codigo correcto.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3591151"
+	},
+	"item": [
+		{
+			"name": "Con datos correctos Compra",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"pm.test(\"Verificar respuesta comprobando el id del proceso\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.idProceso).not.eql(0);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"codProducto\": \"producto1\",\n        \"codTipoSolicitud\": \"C\",\n        \"fechaPedido\": \"2024-09-16\",\n        \"importe\": 700000,\n        \"esTotal\": false,\n        \"idFormaPago\": \"CB\",\n        \"idPedido\": \"H7\",\n        \"requiereAutorizacion\": false,\n        \"origen\": \"OT\"\n    },\n    {\n        \"codProducto\": \"producto2\",\n        \"codTipoSolicitud\": \"C\",\n        \"fechaPedido\": \"2024-09-16\",\n        \"importe\": 500000,\n        \"esTotal\": false,\n        \"idFormaPago\": \"CB\",\n        \"idPedido\": \"H8\",\n        \"requiereAutorizacion\": false,\n        \"origen\": \"OT\"\n    },\n    {\n        \"codProducto\": \"producto3\",\n        \"codTipoSolicitud\": \"C\",\n        \"fechaPedido\": \"2024-09-16\",\n        \"importe\": 300000,\n        \"esTotal\": false,\n        \"idFormaPago\": \"CB\",\n        \"idPedido\": \"H9\",\n        \"requiereAutorizacion\": false,\n        \"origen\": \"OT\"\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL_BASE}}/api/negocio/v10/insert-pedidos-list",
+					"host": [
+						"{{URL_BASE}}"
+					],
+					"path": [
+						"api",
+						"negocio",
+						"v10",
+						"insert-pedidos-list"
+					]
+				},
+				"description": "La siguiente prueba envia una solicitud de compra a la API con todos los datos del swagger correctos. Y verifica que la respuesta de la API sea la esperada."
+			},
+			"response": []
+		},
+		{
+			"name": "Con datos incorrectos Compra",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"codProducto\": \"producto1\",\n        \"codTipoSolicitud\": \"C\",\n        \"fechaPedido\": \"2024-09-16\",\n        \"importe\": 700000,\n        \"esTotal\": false,\n        \"idFormaPago\": \"CB\",\n        \"idPedido\": \"H7\",\n        \"requiereAutorizacion\": false,\n        \"origen\": \"OT\"\n    },\n    {\n        \"codProducto\": \"producto2\",\n        \"codTipoSolicitud\": \"C\",\n        \"fechaPedido\": \"2024-09-16\",\n        \"importe\": 500000,\n        \"esTotal\": false,\n        \"idFormaPago\": \"CB\",\n        \"idPedido\": \"H8\",\n        \"requiereAutorizacion\": false,\n        \"origen\": \"OT\"\n    },\n    {\n        \"codProducto\": \"producto3\",\n        \"codTipoSolicitud\": \"C\",\n        \"fechaPedido\": \"2024-09-16\",\n        \"importe\": 300000,\n        \"esTotal\": false,\n        \"idFormaPago\": \"CB\",\n        \"idPedido\": \"H9\",\n        \"requiereAutorizacion\": false,\n        \"origen\": \"OT\"\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:6003/api/negocio/v10/insert-pedidos-list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6003",
+					"path": [
+						"api",
+						"negocio",
+						"v10",
+						"insert-pedidos-list"
+					]
+				},
+				"description": "La siguiente prueba envia datos incorrectos. Ingresando tipo invalido en el campo \"fechaPedido\". Las aserciones incorporadas verifican el codígo de estado 400. Y que el id Proceso devuelto sea 0, significando que no proceso la solicitud la API."
+			},
+			"response": []
+		},
+		{
+			"name": "Omitiendo datos Compra",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"codProducto\": \"producto1\",\n        \"codTipoSolicitud\": \"C\",\n        \"fechaPedido\": \"2024-09-16\",\n        \"importe\": 700000,\n        \"esTotal\": false,\n        \"idFormaPago\": \"CB\",\n        \"idPedido\": \"H7\",\n        \"requiereAutorizacion\": false,\n        \"origen\": \"OT\"\n    },\n    {\n        \"codProducto\": \"producto2\",\n        \"codTipoSolicitud\": \"C\",\n        \"fechaPedido\": \"2024-09-16\",\n        \"importe\": 500000,\n        \"esTotal\": false,\n        \"idFormaPago\": \"CB\",\n        \"idPedido\": \"H8\",\n        \"requiereAutorizacion\": false,\n        \"origen\": \"OT\"\n    },\n    {\n        \"codProducto\": \"producto3\",\n        \"codTipoSolicitud\": \"C\",\n        \"fechaPedido\": \"2024-09-16\",\n        \"importe\": 300000,\n        \"esTotal\": false,\n        \"idFormaPago\": \"CB\",\n        \"idPedido\": \"H9\",\n        \"requiereAutorizacion\": false,\n        \"origen\": \"OT\"\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:6003/api/negocio/v10/insert-pedidos-list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6003",
+					"path": [
+						"api",
+						"negocio",
+						"v10",
+						"insert-pedidos-list"
+					]
+				},
+				"description": "La siguiente prueba se realiza omitiendo campos obligatorios. Y comprueba que la respuesta de la API sea un error 400 y que no proceso la información."
+			},
+			"response": []
+		},
+		{
+			"name": "Con datos correctos Venta",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"codProducto\": \"producto1\",\n        \"codTipoSolicitud\": \"C\",\n        \"fechaPedido\": \"2024-09-16\",\n        \"importe\": 700000,\n        \"esTotal\": false,\n        \"idFormaPago\": \"CB\",\n        \"idPedido\": \"H7\",\n        \"requiereAutorizacion\": false,\n        \"origen\": \"OT\"\n    },\n    {\n        \"codProducto\": \"producto2\",\n        \"codTipoSolicitud\": \"C\",\n        \"fechaPedido\": \"2024-09-16\",\n        \"importe\": 500000,\n        \"esTotal\": false,\n        \"idFormaPago\": \"CB\",\n        \"idPedido\": \"H8\",\n        \"requiereAutorizacion\": false,\n        \"origen\": \"OT\"\n    },\n    {\n        \"codProducto\": \"producto3\",\n        \"codTipoSolicitud\": \"C\",\n        \"fechaPedido\": \"2024-09-16\",\n        \"importe\": 300000,\n        \"esTotal\": false,\n        \"idFormaPago\": \"CB\",\n        \"idPedido\": \"H9\",\n        \"requiereAutorizacion\": false,\n        \"origen\": \"OT\"\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:6003/api/negocio/v10/insert-pedidos-list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6003",
+					"path": [
+						"api",
+						"negocio",
+						"v10",
+						"insert-pedidos-list"
+					]
+				},
+				"description": "La prueba envia la informacion completa del swagger de la API. Para hacer un POST. Se verifica el codigo de respuesta 201, y que devuelve un id de proceso. Lo que significa que la solicitud fue procesada."
+			},
+			"response": []
+		},
+		{
+			"name": "Con datos incorrectos Venta",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"codProducto\": \"producto1\",\n        \"codTipoSolicitud\": \"C\",\n        \"fechaPedido\": \"2024-09-16\",\n        \"importe\": 700000,\n        \"esTotal\": false,\n        \"idFormaPago\": \"CB\",\n        \"idPedido\": \"H7\",\n        \"requiereAutorizacion\": false,\n        \"origen\": \"OT\"\n    },\n    {\n        \"codProducto\": \"producto2\",\n        \"codTipoSolicitud\": \"C\",\n        \"fechaPedido\": \"2024-09-16\",\n        \"importe\": 500000,\n        \"esTotal\": false,\n        \"idFormaPago\": \"CB\",\n        \"idPedido\": \"H8\",\n        \"requiereAutorizacion\": false,\n        \"origen\": \"OT\"\n    },\n    {\n        \"codProducto\": \"producto3\",\n        \"codTipoSolicitud\": \"C\",\n        \"fechaPedido\": \"2024-09-16\",\n        \"importe\": 300000,\n        \"esTotal\": false,\n        \"idFormaPago\": \"CB\",\n        \"idPedido\": \"H9\",\n        \"requiereAutorizacion\": false,\n        \"origen\": \"OT\"\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:6003/api/negocio/v10/insert-pedidos-list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6003",
+					"path": [
+						"api",
+						"negocio",
+						"v10",
+						"insert-pedidos-list"
+					]
+				},
+				"description": "La siguiente prueba ingresa un tipo de dato incorrecto. \"fechaPedido\". Por lo que verifica como responde la API en este caso. Que devuelva un código 400 y un id proceso 0, verificando que no proceso la solicitud."
+			},
+			"response": []
+		},
+		{
+			"name": "Omitiendo datos Venta",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							"pm.test(\"Verificar respuesta comprobando el id del proceso\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.idProceso).eql(0);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"codProducto\": \"producto1\",\n        \"codTipoSolicitud\": \"V\",\n        \"fechaPedido\": \"2024-09-16\",\n        \"importe\": 700000,\n        \"esTotal\": false,\n        \"idFormaPago\": \"CB\",\n        \"idPedido\": \"H7\",\n        \"requiereAutorizacion\": false,\n        \"origen\": \"OT\"\n    },\n    {\n        \"codProducto\": \"producto2\",\n        \"codTipoSolicitud\": \"V\",\n        \"fechaPedido\": \"2024-09-16\",\n        \"importe\": 500000,\n        \"esTotal\": false,\n        \"idFormaPago\": \"CB\",\n        \"idPedido\": \"H8\",\n        \"requiereAutorizacion\": false,\n        \"origen\": \"OT\"\n    },\n    {\n        \"codProducto\": \"producto3\",\n        \"codTipoSolicitud\": \"V\",\n        \"importe\": 300000,\n        \"esTotal\": false,\n        \"idFormaPago\": \"CB\",\n        \"idPedido\": \"H9\",\n        \"requiereAutorizacion\": false,\n        \"origen\": \"OT\"\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL_BASE}}/api/negocio/v10/insert-pedidos-list",
+					"host": [
+						"{{URL_BASE}}"
+					],
+					"path": [
+						"api",
+						"negocio",
+						"v10",
+						"insert-pedidos-list"
+					]
+				},
+				"description": "La siguiente prueba omite campos obligatorios en un POST a la API. Por lo que se verifica que la API no procese la solicitud y responda con un status code 400 y un id proceso 0. Lo que significa que no proceso la solicitud."
+			},
+			"response": []
+		}
+	]
+}
