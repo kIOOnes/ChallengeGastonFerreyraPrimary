@@ -1,0 +1,9 @@
+Criterios de Aceptacion / Fallo en las pruebas de JMETER:
+
+Se tomo como referencia un API que trabaja en sistemas financieros en linea. Para relevar los requerimientos de las pruebas.
+Se utilizo para ello el PSD2 (Payment service directory 2) , y se utilizaron los listeners para validar los requisitos:
+
+1) Tasa de errores aceptable : de 0.01 a 0.1%
+2) Tiempo de respuesta promedio: 100-200 ms
+3) Capacidad minima de solicitudes secuenciales: 1 solicitud cada 0.6 segundos para completar 1 millon en una semana.
+
